@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Calendar, Menu, Settings, User } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <nav className="bg-background border-b border-border shadow-sm">
@@ -26,11 +28,11 @@ export function Navbar() {
             <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors">
               Contato
             </a>
-            <Button variant="ghost" size="sm">
+            <Button variant="ghost" size="sm" onClick={() => navigate("/login")}>
               <User className="h-4 w-4 mr-2" />
               Entrar
             </Button>
-            <Button variant="hero" size="default">
+            <Button variant="hero" size="default" onClick={() => navigate("/login")}>
               Começar Grátis
             </Button>
           </div>
@@ -61,11 +63,11 @@ export function Navbar() {
                 Contato
               </a>
               <div className="flex flex-col gap-2 pt-2">
-                <Button variant="ghost" size="sm">
+                <Button variant="ghost" size="sm" onClick={() => navigate("/login")}>
                   <User className="h-4 w-4 mr-2" />
                   Entrar
                 </Button>
-                <Button variant="hero" size="default">
+                <Button variant="hero" size="default" onClick={() => navigate("/login")}>
                   Começar Grátis
                 </Button>
               </div>
