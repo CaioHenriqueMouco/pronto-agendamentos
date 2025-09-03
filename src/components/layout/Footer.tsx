@@ -19,7 +19,7 @@ export function Footer() {
             </p>
             <div className="flex gap-2">
               <Button variant="outline" size="sm">
-                Começar Grátis
+                Começar
               </Button>
             </div>
           </div>
@@ -54,7 +54,7 @@ export function Footer() {
             <div className="space-y-3 text-sm">
               <div className="flex items-center gap-2">
                 <Mail className="h-4 w-4 text-primary" />
-                <span className="text-muted-foreground">contato@agendaflow.com.br</span>
+                <span className="text-muted-foreground">contato@mdata.com.br</span>
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="h-4 w-4 text-primary" />
@@ -62,7 +62,7 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="h-4 w-4 text-primary" />
-                <span className="text-muted-foreground">São Paulo, SP</span>
+                <span className="text-muted-foreground">Jales, SP</span>
               </div>
             </div>
           </div>
@@ -71,7 +71,7 @@ export function Footer() {
         <div className="border-t border-border mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-sm text-muted-foreground">
-              © 2024 AgendaFlow. Todos os direitos reservados.
+              © 2025 MData. Todos os direitos reservados.
             </div>
             <div className="flex gap-6 text-sm">
               <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
