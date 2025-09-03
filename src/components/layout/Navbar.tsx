@@ -14,13 +14,13 @@ export function Navbar() {
           {/* Logo */}
           <div className="flex items-center gap-2">
             <Calendar className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold text-foreground">AgendaFlow</span>
+            <span className="text-xl font-bold text-foreground">Mdata Serviços</span>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
             <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">
-              Recursos
+              Funcionalidades
             </a>
             <a href="#pricing" className="text-muted-foreground hover:text-foreground transition-colors">
               Preços
@@ -33,7 +33,7 @@ export function Navbar() {
               Entrar
             </Button>
             <Button variant="hero" size="default" onClick={() => navigate("/login")}>
-              Começar Grátis
+              Começar
             </Button>
           </div>
 
@@ -54,7 +54,7 @@ export function Navbar() {
           <div className="md:hidden py-4 border-t border-border">
             <div className="flex flex-col gap-4">
               <a href="#features" className="text-muted-foreground hover:text-foreground">
-                Recursos
+                Funcionalidades
               </a>
               <a href="#pricing" className="text-muted-foreground hover:text-foreground">
                 Preços
@@ -68,7 +68,7 @@ export function Navbar() {
                   Entrar
                 </Button>
                 <Button variant="hero" size="default" onClick={() => navigate("/login")}>
-                  Começar Grátis
+                  Começar
                 </Button>
               </div>
             </div>
