@@ -11,7 +11,7 @@ export function Footer() {
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <Calendar className="h-6 w-6 text-primary" />
-              <span className="text-lg font-bold text-foreground">AgendaFlow</span>
+              <span className="text-lg font-bold text-foreground">MData Serviços</span>
             </div>
             <p className="text-muted-foreground text-sm">
               A plataforma mais completa para gestão de agendamentos. 
@@ -28,7 +28,7 @@ export function Footer() {
           <div>
             <h3 className="font-semibold text-foreground mb-4">Produto</h3>
             <ul className="space-y-2 text-sm">
-              <li><a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Recursos</a></li>
+              <li><a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Funcionalidades</a></li>
               <li><a href="#pricing" className="text-muted-foreground hover:text-foreground transition-colors">Preços</a></li>
               <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Integrações</a></li>
               <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">API</a></li>
@@ -58,7 +58,7 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="h-4 w-4 text-primary" />
-                <span className="text-muted-foreground">(11) 99999-9999</span>
+                <span className="text-muted-foreground">(17) 99999-9999</span>
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="h-4 w-4 text-primary" />
@@ -71,7 +71,7 @@ export function Footer() {
         <div className="border-t border-border mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-sm text-muted-foreground">
-              © 2025 MData. Todos os direitos reservados.
+              © 2025 MData Serviços. Todos os direitos reservados.
             </div>
             <div className="flex gap-6 text-sm">
               <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
