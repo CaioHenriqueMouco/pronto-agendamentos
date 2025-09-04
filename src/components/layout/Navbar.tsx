@@ -1,14 +1,15 @@
 import { Button } from "@/components/ui/button";
-import { Calendar, Menu, Settings, User } from "lucide-react";
+import { Calendar, Menu, User } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ThemeToggle } from "@/components/ui/thmetoggle"; // novo
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   return (
-    <nav className="bg-background border-b border-border shadow-sm">
+    <nav className="bg-background border-b border-border shadow-sm transition-colors duration-300 dark:bg-gray-950 dark:border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -35,10 +36,12 @@ export function Navbar() {
             <Button variant="hero" size="default" onClick={() => navigate("/login")}>
               Começar
             </Button>
+            <ThemeToggle /> {/* botão de alternância */}
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center gap-2">
+            <ThemeToggle />
             <Button
               variant="ghost"
               size="icon"
@@ -51,7 +54,7 @@ export function Navbar() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-border">
+          <div className="md:hidden py-4 border-t border-border dark:border-gray-800">
             <div className="flex flex-col gap-4">
               <a href="#features" className="text-muted-foreground hover:text-foreground">
                 Funcionalidades
