@@ -75,7 +75,7 @@ const Login = () => {
           <CardHeader className="space-y-1">
             <CardTitle className="text-2xl font-bold text-center">Entrar na Plataforma</CardTitle>
             <CardDescription className="text-center">
-              Sistema de Agendamento SaaS
+              Sistema de Agendamento
             </CardDescription>
           </CardHeader>
           <CardContent>
