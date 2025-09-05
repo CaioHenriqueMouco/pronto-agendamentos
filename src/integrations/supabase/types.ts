@@ -14,6 +14,291 @@ export type Database = {
   }
   public: {
     Tables: {
+      agendamentos: {
+        Row: {
+          cliente_id: string | null
+          created_at: string
+          horario_id: string | null
+          id: string
+          observacoes: string | null
+          profissional_id: string | null
+          status: string
+          tenant_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          cliente_id?: string | null
+          created_at?: string
+          horario_id?: string | null
+          id?: string
+          observacoes?: string | null
+          profissional_id?: string | null
+          status?: string
+          tenant_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          cliente_id?: string | null
+          created_at?: string
+          horario_id?: string | null
+          id?: string
+          observacoes?: string | null
+          profissional_id?: string | null
+          status?: string
+          tenant_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agendamentos_cliente_id_fkey"
+            columns: ["cliente_id"]
+            isOneToOne: false
+            referencedRelation: "clientes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "agendamentos_horario_id_fkey"
+            columns: ["horario_id"]
+            isOneToOne: false
+            referencedRelation: "horarios_disponiveis"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "agendamentos_profissional_id_fkey"
+            columns: ["profissional_id"]
+            isOneToOne: false
+            referencedRelation: "profissionais"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "agendamentos_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      clientes: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: string
+          nome: string
+          telefone: string | null
+          tenant_id: string | null
+          tipo: string
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          nome: string
+          telefone?: string | null
+          tenant_id?: string | null
+          tipo?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          nome?: string
+          telefone?: string | null
+          tenant_id?: string | null
+          tipo?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "clientes_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      feature_flags: {
+        Row: {
+          created_at: string
+          enabled: boolean | null
+          flag_key: string
+          flag_value: string
+          id: string
+          tenant_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          enabled?: boolean | null
+          flag_key: string
+          flag_value: string
+          id?: string
+          tenant_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          enabled?: boolean | null
+          flag_key?: string
+          flag_value?: string
+          id?: string
+          tenant_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "feature_flags_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      horarios_disponiveis: {
+        Row: {
+          created_at: string
+          data: string
+          disponivel: boolean | null
+          hora: string
+          id: string
+          profissional_id: string | null
+          tenant_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          data: string
+          disponivel?: boolean | null
+          hora: string
+          id?: string
+          profissional_id?: string | null
+          tenant_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          data?: string
+          disponivel?: boolean | null
+          hora?: string
+          id?: string
+          profissional_id?: string | null
+          tenant_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "horarios_disponiveis_profissional_id_fkey"
+            columns: ["profissional_id"]
+            isOneToOne: false
+            referencedRelation: "profissionais"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "horarios_disponiveis_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notifications: {
+        Row: {
+          agendamento_id: string | null
+          assunto: string | null
+          conteudo: string
+          created_at: string
+          destinatario: string
+          id: string
+          status: string
+          tenant_id: string | null
+          tentativas: number | null
+          tipo: string
+          updated_at: string
+        }
+        Insert: {
+          agendamento_id?: string | null
+          assunto?: string | null
+          conteudo: string
+          created_at?: string
+          destinatario: string
+          id?: string
+          status?: string
+          tenant_id?: string | null
+          tentativas?: number | null
+          tipo: string
+          updated_at?: string
+        }
+        Update: {
+          agendamento_id?: string | null
+          assunto?: string | null
+          conteudo?: string
+          created_at?: string
+          destinatario?: string
+          id?: string
+          status?: string
+          tenant_id?: string | null
+          tentativas?: number | null
+          tipo?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_agendamento_id_fkey"
+            columns: ["agendamento_id"]
+            isOneToOne: false
+            referencedRelation: "agendamentos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notifications_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      plans: {
+        Row: {
+          created_at: string
+          description: string | null
+          features: Json | null
+          id: string
+          limits: Json | null
+          name: string
+          price_monthly: number | null
+          price_yearly: number | null
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          features?: Json | null
+          id: string
+          limits?: Json | null
+          name: string
+          price_monthly?: number | null
+          price_yearly?: number | null
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          features?: Json | null
+          id?: string
+          limits?: Json | null
+          name?: string
+          price_monthly?: number | null
+          price_yearly?: number | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -67,6 +352,53 @@ export type Database = {
           },
         ]
       }
+      profissionais: {
+        Row: {
+          ativo: boolean | null
+          created_at: string
+          email: string | null
+          especialidades: string[] | null
+          id: string
+          nome: string
+          telefone: string | null
+          tenant_id: string | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          ativo?: boolean | null
+          created_at?: string
+          email?: string | null
+          especialidades?: string[] | null
+          id?: string
+          nome: string
+          telefone?: string | null
+          tenant_id?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          ativo?: boolean | null
+          created_at?: string
+          email?: string | null
+          especialidades?: string[] | null
+          id?: string
+          nome?: string
+          telefone?: string | null
+          tenant_id?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profissionais_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       tenants: {
         Row: {
           created_at: string
@@ -105,7 +437,18 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      create_agendamento: {
+        Args: {
+          p_cliente_id: string
+          p_horario_id: string
+          p_profissional_id: string
+        }
+        Returns: {
+          agendamento_id: string
+          message: string
+          success: boolean
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
