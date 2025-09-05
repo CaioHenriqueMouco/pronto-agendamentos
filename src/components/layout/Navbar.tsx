@@ -29,6 +29,10 @@ export function Navbar() {
             <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors">
               Contato
             </a>
+            <Button variant="outline" size="sm" onClick={() => navigate("/agendamento")}>
+              <Calendar className="h-4 w-4 mr-2" />
+              Agendar
+            </Button>
             <Button variant="ghost" size="sm" onClick={() => navigate("/login")}>
               <User className="h-4 w-4 mr-2" />
               Entrar
@@ -66,6 +70,10 @@ export function Navbar() {
                 Contato
               </a>
               <div className="flex flex-col gap-2 pt-2">
+                <Button variant="outline" size="sm" onClick={() => navigate("/agendamento")}>
+                  <Calendar className="h-4 w-4 mr-2" />
+                  Agendar
+                </Button>
                 <Button variant="ghost" size="sm" onClick={() => navigate("/login")}>
                   <User className="h-4 w-4 mr-2" />
                   Entrar
