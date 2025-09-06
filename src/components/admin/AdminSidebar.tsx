@@ -15,14 +15,14 @@ import {
 
 const menuItems = [
   { icon: LayoutDashboard, label: "Dashboard", id: "dashboard" },
+  { icon: Calendar, label: "Agendamentos", id: "appointments" },
+  { icon: Users, label: "Clientes", id: "clients" },
+  { icon: Shield, label: "Profissionais", id: "professionals" },
+  { icon: Settings, label: "Serviços", id: "services" },
+  { icon: CreditCard, label: "Financeiro", id: "financial" },
   { icon: Building, label: "Tenants", id: "tenants" },
   { icon: Users, label: "Usuários", id: "users" },
-  { icon: Calendar, label: "Agendamentos", id: "appointments" },
   { icon: BarChart3, label: "Relatórios", id: "reports" },
-  { icon: CreditCard, label: "Faturamento", id: "billing" },
-  { icon: Palette, label: "Branding", id: "branding" },
-  { icon: Bell, label: "Notificações", id: "notifications" },
-  { icon: Shield, label: "Segurança", id: "security" },
   { icon: Settings, label: "Configurações", id: "settings" },
 ];
 
