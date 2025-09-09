@@ -80,7 +80,7 @@ export const AdminClients = () => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Users className="w-5 h-5" />
-            Gestão de Clientes
+            Gerenciamento de Clientes
           </CardTitle>
           <CardDescription>
             Gerencie informações dos clientes e histórico de agendamentos
@@ -99,7 +99,7 @@ export const AdminClients = () => {
             </div>
             <Button>
               <Plus className="w-4 h-4 mr-2" />
-              Novo Cliente
+              Adicionar Cliente
             </Button>
           </div>
 
@@ -107,13 +107,10 @@ export const AdminClients = () => {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Cliente</TableHead>
-                  <TableHead>Contato</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Categoria</TableHead>
-                  <TableHead>Agendamentos</TableHead>
-                  <TableHead>Último Agendamento</TableHead>
-                  <TableHead>Cadastro</TableHead>
+                  <TableHead>Nome Completo</TableHead>
+                  <TableHead>E-mail</TableHead>
+                  <TableHead>Telefone</TableHead>
+                  <TableHead>Nº de Agendamentos</TableHead>
                   <TableHead className="w-[70px]">Ações</TableHead>
                 </TableRow>
               </TableHeader>
@@ -134,38 +131,19 @@ export const AdminClients = () => {
                       </div>
                     </TableCell>
                     <TableCell>
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-1 text-sm">
-                          <Mail className="w-4 h-4" />
-                          {client.email}
-                        </div>
-                        <div className="flex items-center gap-1 text-sm">
-                          <Phone className="w-4 h-4" />
-                          {client.phone}
-                        </div>
+                      <div className="flex items-center gap-1">
+                        <Mail className="w-4 h-4" />
+                        {client.email}
                       </div>
                     </TableCell>
                     <TableCell>
-                      <Badge variant={getStatusColor(client.status)}>
-                        {client.status}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant={getCategoryColor(client.category)}>
-                        {client.category}
-                      </Badge>
+                      <div className="flex items-center gap-1">
+                        <Phone className="w-4 h-4" />
+                        {client.phone}
+                      </div>
                     </TableCell>
                     <TableCell className="text-center">
                       <span className="font-medium">{client.totalAppointments}</span>
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-1 text-sm">
-                        <Calendar className="w-4 h-4" />
-                        {client.lastAppointment}
-                      </div>
-                    </TableCell>
-                    <TableCell className="text-sm text-muted-foreground">
-                      {client.registeredAt}
                     </TableCell>
                     <TableCell>
                       <DropdownMenu>
@@ -176,20 +154,16 @@ export const AdminClients = () => {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                           <DropdownMenuItem>
-                            <Eye className="mr-2 h-4 w-4" />
-                            Ver Perfil
+                            <Calendar className="mr-2 h-4 w-4" />
+                            Ver Histórico
                           </DropdownMenuItem>
                           <DropdownMenuItem>
                             <Edit className="mr-2 h-4 w-4" />
                             Editar
                           </DropdownMenuItem>
-                          <DropdownMenuItem>
-                            <Calendar className="mr-2 h-4 w-4" />
-                            Histórico
-                          </DropdownMenuItem>
                           <DropdownMenuItem className="text-destructive">
                             <Trash2 className="mr-2 h-4 w-4" />
-                            Bloquear
+                            Desativar
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>

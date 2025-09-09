@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Calendar, Clock, Search, Filter, Plus, MoreHorizontal, Eye, Edit, Trash2 } from "lucide-react";
+import { Calendar, Clock, Search, Filter, Plus, MoreHorizontal, Eye, Edit, X, DollarSign } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const mockAppointments = [
@@ -16,6 +16,7 @@ const mockAppointments = [
     service: "Consulta Geral",
     date: "2024-01-15",
     time: "09:00",
+    value: 150.00,
     status: "confirmado",
     payment: "pago",
     notes: "Primeira consulta"
@@ -27,6 +28,7 @@ const mockAppointments = [
     service: "Fisioterapia",
     date: "2024-01-15",
     time: "14:30",
+    value: 80.00,
     status: "pendente",
     payment: "pendente",
     notes: ""
@@ -38,9 +40,22 @@ const mockAppointments = [
     service: "Retorno",
     date: "2024-01-16",
     time: "10:15",
+    value: 100.00,
     status: "cancelado",
     payment: "estornado",
     notes: "Cancelado pelo cliente"
+  },
+  {
+    id: "4",
+    client: "Ana Paula",
+    professional: "Dra. Ana Lima",
+    service: "Consulta Especializada",
+    date: "2024-01-17",
+    time: "16:00",
+    value: 200.00,
+    status: "confirmado",
+    payment: "pago",
+    notes: "Paciente retornando"
   }
 ];
 
@@ -65,14 +80,27 @@ const getPaymentColor = (payment: string) => {
 export const AdminAppointments = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("todos");
+  const [professionalFilter, setProfessionalFilter] = useState("todos");
+  const [dateFrom, setDateFrom] = useState("");
+  const [dateTo, setDateTo] = useState("");
 
   const filteredAppointments = mockAppointments.filter(appointment => {
     const matchesSearch = appointment.client.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          appointment.professional.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          appointment.service.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = statusFilter === "todos" || appointment.status === statusFilter;
-    return matchesSearch && matchesStatus;
+    const matchesProfessional = professionalFilter === "todos" || appointment.professional === professionalFilter;
+    const matchesDateFrom = !dateFrom || appointment.date >= dateFrom;
+    const matchesDateTo = !dateTo || appointment.date <= dateTo;
+    return matchesSearch && matchesStatus && matchesProfessional && matchesDateFrom && matchesDateTo;
   });
+
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(price);
+  };
 
   return (
     <div className="space-y-6">
@@ -87,32 +115,65 @@ export const AdminAppointments = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="flex flex-col sm:flex-row gap-4 mb-6">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input
-                placeholder="Buscar por cliente, profissional ou serviço..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10"
-              />
+          <div className="space-y-4 mb-6">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <div className="relative flex-1">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <Input
+                  placeholder="Buscar por cliente, profissional ou serviço..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10"
+                />
+              </div>
+              <Button>
+                <Plus className="w-4 h-4 mr-2" />
+                Novo Agendamento
+              </Button>
             </div>
-            <Select value={statusFilter} onValueChange={setStatusFilter}>
-              <SelectTrigger className="w-48">
-                <Filter className="w-4 h-4 mr-2" />
-                <SelectValue placeholder="Filtrar por status" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="todos">Todos os status</SelectItem>
-                <SelectItem value="confirmado">Confirmado</SelectItem>
-                <SelectItem value="pendente">Pendente</SelectItem>
-                <SelectItem value="cancelado">Cancelado</SelectItem>
-              </SelectContent>
-            </Select>
-            <Button>
-              <Plus className="w-4 h-4 mr-2" />
-              Novo Agendamento
-            </Button>
+            
+            <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex gap-2">
+                <Input
+                  type="date"
+                  placeholder="Data inicial"
+                  value={dateFrom}
+                  onChange={(e) => setDateFrom(e.target.value)}
+                  className="w-40"
+                />
+                <Input
+                  type="date"
+                  placeholder="Data final"
+                  value={dateTo}
+                  onChange={(e) => setDateTo(e.target.value)}
+                  className="w-40"
+                />
+              </div>
+              
+              <Select value={statusFilter} onValueChange={setStatusFilter}>
+                <SelectTrigger className="w-48">
+                  <Filter className="w-4 h-4 mr-2" />
+                  <SelectValue placeholder="Status" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="todos">Todos os status</SelectItem>
+                  <SelectItem value="confirmado">Confirmado</SelectItem>
+                  <SelectItem value="pendente">Pendente</SelectItem>
+                  <SelectItem value="cancelado">Cancelado</SelectItem>
+                </SelectContent>
+              </Select>
+
+              <Select value={professionalFilter} onValueChange={setProfessionalFilter}>
+                <SelectTrigger className="w-48">
+                  <SelectValue placeholder="Profissional" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="todos">Todos os profissionais</SelectItem>
+                  <SelectItem value="Dr. João Santos">Dr. João Santos</SelectItem>
+                  <SelectItem value="Dra. Ana Lima">Dra. Ana Lima</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
 
           <div className="rounded-md border">
@@ -120,12 +181,11 @@ export const AdminAppointments = () => {
               <TableHeader>
                 <TableRow>
                   <TableHead>Cliente</TableHead>
-                  <TableHead>Profissional</TableHead>
                   <TableHead>Serviço</TableHead>
-                  <TableHead>Data/Hora</TableHead>
+                  <TableHead>Profissional</TableHead>
+                  <TableHead>Data e Hora</TableHead>
+                  <TableHead>Valor</TableHead>
                   <TableHead>Status</TableHead>
-                  <TableHead>Pagamento</TableHead>
-                  <TableHead>Observações</TableHead>
                   <TableHead className="w-[70px]">Ações</TableHead>
                 </TableRow>
               </TableHeader>
@@ -133,8 +193,8 @@ export const AdminAppointments = () => {
                 {filteredAppointments.map((appointment) => (
                   <TableRow key={appointment.id}>
                     <TableCell className="font-medium">{appointment.client}</TableCell>
-                    <TableCell>{appointment.professional}</TableCell>
                     <TableCell>{appointment.service}</TableCell>
+                    <TableCell>{appointment.professional}</TableCell>
                     <TableCell>
                       <div className="flex items-center gap-1 text-sm">
                         <Calendar className="w-4 h-4" />
@@ -144,17 +204,15 @@ export const AdminAppointments = () => {
                       </div>
                     </TableCell>
                     <TableCell>
+                      <div className="flex items-center gap-1 font-medium">
+                        <DollarSign className="w-4 h-4" />
+                        {formatPrice(appointment.value)}
+                      </div>
+                    </TableCell>
+                    <TableCell>
                       <Badge variant={getStatusColor(appointment.status)}>
                         {appointment.status}
                       </Badge>
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant={getPaymentColor(appointment.payment)}>
-                        {appointment.payment}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="max-w-[200px] truncate">
-                      {appointment.notes || "-"}
                     </TableCell>
                     <TableCell>
                       <DropdownMenu>
@@ -166,14 +224,14 @@ export const AdminAppointments = () => {
                         <DropdownMenuContent align="end">
                           <DropdownMenuItem>
                             <Eye className="mr-2 h-4 w-4" />
-                            Visualizar
+                            Ver Detalhes
                           </DropdownMenuItem>
                           <DropdownMenuItem>
                             <Edit className="mr-2 h-4 w-4" />
                             Editar
                           </DropdownMenuItem>
                           <DropdownMenuItem className="text-destructive">
-                            <Trash2 className="mr-2 h-4 w-4" />
+                            <X className="mr-2 h-4 w-4" />
                             Cancelar
                           </DropdownMenuItem>
                         </DropdownMenuContent>
